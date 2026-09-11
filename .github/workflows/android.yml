@@ -5,6 +5,10 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Needed for creating/replacing the GitHub Release below.
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -32,9 +36,29 @@ jobs:
       - name: Build split APKs (per ABI, smaller downloads)
         run: flutter build apk --release --split-per-abi
 
-      - name: Upload APKs
+      - name: Upload build artifact (per-run, 14 day backup)
         uses: actions/upload-artifact@v4
         with:
           name: galleryplus-apks
           path: build/app/outputs/flutter-apk/*.apk
           retention-days: 14
+
+      # Rolling "latest" release: delete the previous one first so old
+      # APKs never pile up — every push replaces it with a fresh single
+      # release, auto-deleting the old one.
+      - name: Delete previous release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release delete latest --yes --cleanup-tag || true
+
+      - name: Create release and upload APKs
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest Build
+          body: |
+            Automated build from commit ${{ github.sha }}.
+            This release is auto-replaced on every push to `main` — old
+            APKs are deleted, not kept around.
+          prerelease: false
+          files: build/app/outputs/flutter-apk/*.apk

@@ -107,7 +107,7 @@ class _MediaViewerScreenState extends ConsumerState<MediaViewerScreen> {
       extendBodyBehindAppBar: true,
       appBar: _chromeVisible
           ? AppBar(
-              backgroundColor: Colors.black.withOpacity(0.4),
+              backgroundColor: Colors.black.withValues(alpha: 0.4),
               elevation: 0,
               actions: [
                 IconButton(

@@ -1,4 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// StateProvider/StateNotifier/StateNotifierProvider moved to "legacy" in
+// Riverpod 3.0 — still fully supported, just needs this explicit import.
+import 'package:flutter_riverpod/legacy.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 import '../../../core/permissions/permission_service.dart';

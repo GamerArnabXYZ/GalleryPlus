@@ -6,7 +6,6 @@ import 'package:photo_manager/photo_manager.dart';
 
 import '../../../../core/theme/app_theme.dart';
 import '../../../../shared/widgets/empty_state.dart';
-import '../../data/gallery_repository.dart';
 import '../../providers/gallery_providers.dart';
 import 'album_detail_screen.dart';
 

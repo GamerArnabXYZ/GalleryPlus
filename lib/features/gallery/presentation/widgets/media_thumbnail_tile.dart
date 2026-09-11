@@ -62,7 +62,7 @@ class MediaThumbnailTile extends StatelessWidget {
               child: _SelectionCircle(selected: selected),
             ),
           if (selected)
-            Container(color: Colors.black.withOpacity(0.35)),
+            Container(color: Colors.black.withValues(alpha: 0.35)),
         ],
       ),
     );
@@ -86,7 +86,7 @@ class _VideoDurationBadge extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       decoration: BoxDecoration(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withValues(alpha: 0.6),
         borderRadius: BorderRadius.circular(4),
       ),
       child: Row(
@@ -115,7 +115,7 @@ class _SelectionCircle extends StatelessWidget {
       height: 24,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: selected ? Theme.of(context).colorScheme.primary : Colors.black.withOpacity(0.4),
+        color: selected ? Theme.of(context).colorScheme.primary : Colors.black.withValues(alpha: 0.4),
         border: Border.all(color: Colors.white, width: 1.5),
       ),
       child: selected
