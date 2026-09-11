@@ -1,6 +1,5 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 // StateNotifier/StateNotifierProvider moved to "legacy" in Riverpod 3.0 —
-// still fully supported, just needs this explicit import.
+// this import alone covers everything this file needs.
 import 'package:flutter_riverpod/legacy.dart';
 
 import '../../../core/db/models/trash_entry.dart';

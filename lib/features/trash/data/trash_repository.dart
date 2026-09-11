@@ -73,15 +73,11 @@ class TrashRepository {
     }
 
     if (entry.isVideo) {
-      await PhotoManager.editor.saveVideo(
-        file,
-        filename: entry.fileName,
-        title: entry.fileName,
-      );
+      await PhotoManager.editor.saveVideo(file, title: entry.fileName);
     } else {
       await PhotoManager.editor.saveImage(
         await file.readAsBytes(),
-        title: entry.fileName,
+        filename: entry.fileName,
       );
     }
 

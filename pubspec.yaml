@@ -15,7 +15,9 @@ dependencies:
   flutter_riverpod: ^3.0.0
 
   # Local media access (albums, assets, thumbnails, trash on Android 11+)
-  photo_manager: ^3.6.0
+  # Pinned exact (not ^) — this package's save-asset API has changed
+  # parameter names across recent versions; pinning avoids silent drift.
+  photo_manager: 3.8.3
 
   # Pinch-to-zoom image viewer
   photo_view: ^0.15.0

@@ -1,6 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 // StateNotifier/StateNotifierProvider moved to "legacy" in Riverpod 3.0 —
-// still fully supported, just needs this explicit import.
+// this import alone covers everything this file needs (Ref, family, etc.
+// come through transitively, so a separate base-package import is unused).
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:photo_manager/photo_manager.dart';
 
