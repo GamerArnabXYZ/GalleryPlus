@@ -39,20 +39,16 @@ codegen needed — keeps the CI pipeline simple).
 
 ## Before your first build
 
-1. **App icons** — I didn't generate `mipmap-*` launcher icons (no image
-   asset was provided). Easiest: drop your icon into `assets/icon.png` and
-   add `flutter_launcher_icons` as a dev dependency, or place PNGs manually
-   under `android/app/src/main/res/mipmap-*/ic_launcher.png`.
+1. **App icon** — I generated a simple placeholder launcher icon (purple,
+   matches the app theme, gallery/photo glyph) at every mipmap density so
+   the build doesn't fail on a missing resource. Swap it for your real
+   branding whenever you want — just replace the PNGs under
+   `android/app/src/main/res/mipmap-*/ic_launcher.png`.
 2. **Release signing** — `android/app/build.gradle`'s `release` build type
    currently signs with the **debug** key so `flutter build apk --release`
    works out of the box. Swap in a real `signingConfig` before a Play Store
    release.
-3. **Verify pinned versions** — I couldn't run `flutter pub get` in this
-   environment, so package versions in `pubspec.yaml` (photo_manager,
-   media_kit, riverpod, etc.) are current-as-of-research but not resolved.
-   Run `flutter pub get` first; if any version conflicts, bump the ^caret
-   floor for that package.
-4. **Rename feature** — not implemented yet (photo_manager's rename API
+3. **Rename feature** — not implemented yet (photo_manager's rename API
    varies by version). Everything else in the requested feature list is in.
 
 ## Next step
