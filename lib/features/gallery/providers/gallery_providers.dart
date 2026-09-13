@@ -25,10 +25,7 @@ final permissionServiceProvider =
     Provider<PermissionService>((ref) => const PermissionService());
 
 final mediaDeleteServiceProvider = Provider<MediaDeleteService>((ref) {
-  return MediaDeleteService(
-    galleryRepository: ref.watch(galleryRepositoryProvider),
-    trashRepository: ref.watch(trashRepositoryProvider),
-  );
+  return MediaDeleteService(trashRepository: ref.watch(trashRepositoryProvider));
 });
 
 // ---- Permission state ----

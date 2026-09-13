@@ -90,12 +90,6 @@ class GalleryRepository {
     return withSize.map((e) => e.key).toList();
   }
 
-  /// Native OS trash — Android 11+ only. Throws on Android 10 and below;
-  /// callers should catch and fall back to the app's own trash.
-  Future<void> moveToNativeTrash(List<AssetEntity> assets) {
-    return PhotoManager.editor.android.moveToTrash(assets);
-  }
-
   /// Permanently deletes assets from MediaStore. Returns the ids that were
   /// actually removed.
   Future<List<String>> deletePermanently(List<String> assetIds) {

@@ -83,8 +83,7 @@ class _AlbumDetailScreenState extends ConsumerState<AlbumDetailScreen> {
       builder: (context) => AlertDialog(
         title: Text('Delete ${selected.length} item(s)?'),
         content: const Text(
-          'Items go to trash and can be restored (native trash on Android 11+, '
-          'app trash on older Android).',
+          'Items move to GalleryPlus Trash and can be restored within 30 days.',
         ),
         actions: [
           TextButton(
@@ -109,8 +108,7 @@ class _AlbumDetailScreenState extends ConsumerState<AlbumDetailScreen> {
 
     if (!mounted) return;
     final message = switch (outcome) {
-      DeleteOutcome.movedToNativeTrash => 'Moved to trash.',
-      DeleteOutcome.movedToAppTrash => 'Moved to GalleryPlus trash.',
+      DeleteOutcome.movedToTrash => 'Moved to GalleryPlus trash.',
       DeleteOutcome.failed => 'Could not delete some items.',
     };
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));

@@ -9,10 +9,10 @@ import '../../../core/db/models/trash_entry.dart';
 
 /// Custom, app-level recycle bin.
 ///
-/// Used on Android 8-10 (API < 30), where MediaStore has no native trash.
-/// Trashed files live in the app's private storage (auto-cleared if the
-/// app is uninstalled) and are auto-purged 30 days after trashing, matching
-/// the native Android 11+ trash window for a consistent experience.
+/// Used on every Android version (API 26+) — GalleryPlus never relies on
+/// the OS's own MediaStore trash, so behaviour is identical on every
+/// device. Trashed files live in the app's private storage (auto-cleared
+/// if the app is uninstalled) and are auto-purged 30 days after trashing.
 class TrashRepository {
   TrashRepository();
 

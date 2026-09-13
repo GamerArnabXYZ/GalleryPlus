@@ -53,8 +53,8 @@ class TrashScreen extends ConsumerWidget {
               icon: Icons.delete_outline,
               title: 'Trash is empty',
               subtitle:
-                  'Deleted items on Android 8-10 stay here for 30 days before being removed automatically.\n\n'
-                  'On Android 11+, deleted items go to the system trash (Photos / Files app).',
+                  'Deleted photos and videos stay here for 30 days before being '
+                  'removed automatically — restore anytime before that.',
             )
           : ListView.separated(
               padding: const EdgeInsets.all(AppTheme.spaceMd),

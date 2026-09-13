@@ -28,18 +28,30 @@ codegen needed — keeps the CI pipeline simple).
 
 ## Delete / Trash behaviour (as discussed)
 
-- **Android 11+ (API 30+):** native MediaStore trash via
-  `PhotoManager.editor.android.moveToTrash()` — recoverable from the system
-  Photos/Files app for 30 days.
-- **Android 8–10 (API 26-29):** `moveToTrash` throws on these versions, so
-  `MediaDeleteService` catches that and falls back to GalleryPlus's own
-  trash — the file is copied into the app's private storage, tracked in
-  Hive, and auto-purged after 30 days (`TrashRepository.purgeExpired()`,
-  called once on every app start).
+Every deleted item — on **every** Android version (API 26+) — moves into
+GalleryPlus's own trash: the file is copied into the app's private
+storage, tracked in Hive, and the original is removed from MediaStore.
+Nothing ever goes to the OS-level MediaStore trash, so behaviour is
+identical across every device/OEM. `TrashRepository.purgeExpired()` runs
+once on every app start and silently removes anything past 30 days.
+
+## Splash screen
+
+Native (Kotlin) splash via AndroidX `core-splashscreen` — consistent
+branded splash (purple background + app icon) on every Android version,
+not just Android 12's built-in SplashScreen API. Wired up in:
+- `styles.xml` — `Theme.App.Starting`
+- `MainActivity.kt` — `installSplashScreen()` before `super.onCreate()`
+- `AndroidManifest.xml` — MainActivity's theme
 
 ## Before your first build
 
-1. **App icon** — I generated a simple placeholder launcher icon (purple,
+1. **Storage trade-off, by design** — since everything now goes through
+   the app's own trash, a deleted video sits in app-private storage
+   (duplicated) until it's restored, permanently deleted, or the 30-day
+   auto-purge runs. Worth knowing if someone deletes a lot of large videos
+   at once.
+2. **App icon** — I generated a simple placeholder launcher icon (purple,
    matches the app theme, gallery/photo glyph) at every mipmap density so
    the build doesn't fail on a missing resource. Swap it for your real
    branding whenever you want — just replace the PNGs under
@@ -48,7 +60,7 @@ codegen needed — keeps the CI pipeline simple).
    currently signs with the **debug** key so `flutter build apk --release`
    works out of the box. Swap in a real `signingConfig` before a Play Store
    release.
-3. **Rename feature** — not implemented yet (photo_manager's rename API
+4. **Rename feature** — not implemented yet (photo_manager's rename API
    varies by version). Everything else in the requested feature list is in.
 
 ## Next step
